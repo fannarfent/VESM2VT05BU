@@ -1,6 +1,7 @@
 #include <Servo.h>  //servo library
 Servo myservo;      // create servo object to control servo
-  
+int led1 = 4;
+int led2 = 10;
 int Echo = A4;  
 int Trig = A5; 
 #define ENA 5
@@ -35,20 +36,30 @@ void back() {
 void left() {
   analogWrite(ENA, carSpeed);
   analogWrite(ENB, carSpeed);
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, HIGH);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH); 
+  digitalWrite(led2, HIGH);   // turn the LED on (HIGH is the voltage level)
+  delay(1000);               // wait for a second
+  digitalWrite(led2, LOW);    // turn the LED off by making the voltage LOW
+  delay(500);
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW); 
   Serial.println("Left");
 }
  
 void right() {
+  
   analogWrite(ENA, carSpeed);
   analogWrite(ENB, carSpeed);
-  digitalWrite(IN1, HIGH);
-  digitalWrite(IN2, LOW);
-  digitalWrite(IN3, HIGH);
-  digitalWrite(IN4, LOW);
+  digitalWrite(led1, HIGH);   // turn the LED on (HIGH is the voltage level)
+  delay(1000);               // wait for a second
+  digitalWrite(led1, LOW);    // turn the LED off by making the voltage LOW
+  delay(500);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
+  
   Serial.println("Right");
 }
  
@@ -82,6 +93,8 @@ void setup() {
   pinMode(IN4, OUTPUT);
   pinMode(ENA, OUTPUT);
   pinMode(ENB, OUTPUT);
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
   stop();
 } 
  
